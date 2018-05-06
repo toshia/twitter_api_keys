@@ -1,0 +1,41 @@
+== なんこれ
+
+2018/5/4に、link:http://mikutter.hatenablog.com/entry/2018/05/05/164014[mikutterのTwitterコンシューマキーが凍結されました]。
+
+上記記事で案内されている方法はソースコードの書き換えが必要で、何かと不便です。
+
+mikutter 3.7以降なら、以下の手順に従えば、以後mikutterのソースコードを書き換えずに、任意のCK/CSでmikutterを利用できるようになります。
+
+また、3.6以前でTwitterを使えるように頑張った人は、無理にこの手順を実行する必要はないです。
+
+== 使い方
+
+=== 下準備
+
+このプラグインをインストールします。
+
+[source,sh]
+----
+$ mkdir ~/.mikutter/plugin/; git clone https://github.com/toshia/twitter_api_keys.git ~/.mikutter/plugin/twitter_api_keys
+----
+
+そして、お好きなエディタで ~/.mikutter/plugin/twitter_api_keys/twitter_api_keys.rb を開いてください。
+
+=== インストール
+
+ここから、「既に3.6以前でソースコードを書き換えてしまった人」と「3.7からmikutterでTwitterを使い始める人」で手順が違います。
+
+==== 既に3.6以前でソースコードを書き換えてしまった人
+
+. ~/.mikutter/plugin/twitter_api_keys/twitter_api_keys.rb をテキストエディタで開く。ファイルがない場合、前述の下準備を行う
+. mikutterのcore/config.rbに書いたConsumer KeyとConsumer Secretを、1.で開いたファイルのconsumer_keyとconsumer_secretに書き写す
+. mikutterのcore/config.rbに行った変更を元に戻す
+. mikutterを起動し、この一連の手順を実行する前と同じようにTwitterが使えていることを確認する
+
+==== 3.7からmikutterでTwitterを使い始める人
+
+. dev.twitter.comで、開発者用CK/CSを得る
+. mikutterを開き、設定画面の「アカウント情報」を開き、アカウントの登録をすべて削除して、mikutterを閉じる
+. ~/.mikutter/plugin/twitter_api_keys/twitter_api_keys.rb をテキストエディタで開く。ファイルがない場合、前述の下準備を行う
+. このファイルの、consumer_keyとconsumer_secretの値を、1.の手順で得た情報に書き換える
+. mikutterを起動し、2で登録解除したTwitterアカウントを登録し直す
